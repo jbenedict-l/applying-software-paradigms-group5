@@ -16,13 +16,13 @@ class Calculator:
 
     def divide(self, value):
         if value == 0:
-            return "Error: Division by zero is not allowed."
+            return "Error: Cannot divide by zero."
         self.current /= value
         return self.current
 
     def modulus(self, value):
         if value == 0:
-            return "Error: Modulus by zero is not allowed."
+            return "Error: Cannot perform modulo by zero."
         self.current %= value
         return self.current
 
@@ -41,12 +41,12 @@ def main():
     print("Start from 0")
     print("Enter operations like: + 5")
     print("Available operators: +  -  *  /  %")
-    print("Commands: AC (All Clear), exit\n")
+    print("Commands: AC (All Clear), quit\n")
 
     while True:
         user_input = input(">> ")
 
-        if user_input.lower() == "exit":
+        if user_input.lower() == "quit":
             print("Calculator closed.")
             break
 

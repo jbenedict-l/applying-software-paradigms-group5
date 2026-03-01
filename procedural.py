@@ -82,7 +82,7 @@ def perform_operation(a, b, choice):
         # Example: 10 % 3 = 1  (because 10 / 3 = 3 remainder 1)
         # Also check for zero to avoid crash
         if b == 0:
-            return None, "Modulus by zero is not allowed."
+            return None, "Error: Cannot perform modulo by zero."
         result = a % b
         operator = "%"
 

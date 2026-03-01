@@ -14,7 +14,7 @@ def divide(a, b):
 
 def modulo(a, b):
     if b == 0:
-        return "Error: Cannot modulo by zero!"
+        return "Error: Cannot perform modulo by zero!"
     return a % b
 
 def calculate(num1, num2, operation):
