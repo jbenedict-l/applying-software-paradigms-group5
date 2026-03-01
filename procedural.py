@@ -129,8 +129,8 @@ def main():
             break  # Break out of the loop and end the program
 
         # STEP 3: Get two numbers from the user
-        a = get_numeric_input("Enter first number  (a): ")  
-        b = get_numeric_input("Enter second number (b): ")
+        a = get_numeric_input("Enter first number: ")  
+        b = get_numeric_input("Enter second number: ")
 
         # STEP 4: Perform the chosen arithmetic operation
         # perform_operation() returns two values:

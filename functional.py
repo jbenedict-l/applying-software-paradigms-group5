@@ -38,6 +38,6 @@ if __name__ == "__main__":
         op_choice = input("Enter operation (+, -, *, /, %): ")
 
         result = calculate(val1, val2, op_choice)
-        print(f"Result: {result}")
+        print(f"Result: {val1} {op_choice} {val2} = {result}")
     except ValueError:
         print("Error: Invalid numeric input.")
