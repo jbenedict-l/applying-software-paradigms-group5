@@ -31,6 +31,13 @@ def calculate(num1, num2, operation):
     
     return operations[operation](num1, num2)
 
-# Usage Example:
-result = calculate(10, 2, '/')
-print(result)
+if __name__ == "__main__":
+    try:
+        val1 = float(input("Enter first number: "))
+        val2 = float(input("Enter second number: "))
+        op_choice = input("Enter operation (+, -, *, /, %): ")
+
+        result = calculate(val1, val2, op_choice)
+        print(f"Result: {result}")
+    except ValueError:
+        print("Error: Invalid numeric input.")
