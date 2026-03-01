@@ -28,6 +28,7 @@ def get_operation_choice():
     print("  2. Subtraction    (-)")
     print("  3. Multiplication (*)")
     print("  4. Division       (/)")
+    print("  5. Modulus        (%)")
     print("  0. Quit")
 
     while True:  # Keep looping until a valid choice is entered
@@ -76,6 +77,15 @@ def perform_operation(a, b, choice):
         result = a / b
         operator = "/"
 
+    elif choice == 5:
+        # MODULUS: get the remainder when a is divided by b
+        # Example: 10 % 3 = 1  (because 10 / 3 = 3 remainder 1)
+        # Also check for zero to avoid crash
+        if b == 0:
+            return None, "Modulus by zero is not allowed."
+        result = a % b
+        operator = "%"
+
     else:
         # Fallback for any unexpected choice value
         return None, "Unknown command error. Try executing this program again."
@@ -103,7 +113,7 @@ def display_result(message):
 def main():
     # Display the program header/title
     print("=" * 45)
-    print(" Calculator")
+    print(" Smart Arithmetic Calculator")
     print(" Procedural Paradigm")
     print("=" * 45)
 

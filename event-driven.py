@@ -16,9 +16,9 @@ def is_number(value):
 
 def show_menu():
     print("=" * 45)
-    print("--- Calculator ---")
+    print("--- Smart Arithmetic Calculator ---")
     print("--- Event-driven Paradigm ---")
-    print("Commands: add, subtract, multiply, divide, quit")
+    print("Commands: add, subtract, multiply, divide, modulo, quit")
     print("=" * 45)
 
 def show_prompt():
@@ -31,7 +31,7 @@ def show_prompt():
 
 # ── Handlers ──────────────────────────────
 def handle_idle(event):
-    if event in ("add", "subtract", "multiply", "divide"):
+    if event in ("add", "subtract", "multiply", "divide", "modulo"):
         state["operation"] = event
         state["current"]   = "WAITING_FOR_A"
 
@@ -40,7 +40,7 @@ def handle_idle(event):
         return "QUIT"
 
     else:
-        print(f"Unknown command '{event}'. Try: add, subtract, multiply, divide, quit")
+        print(f"Unknown command '{event}'. Try: add, subtract, multiply, divide, modulo, quit")
 
 
 def handle_waiting_for_a(event):
@@ -86,6 +86,14 @@ def handle_computing():
             # Clean up result display
             result = int(result) if result == int(result) else round(result, 10) #Ternary Operator
             print(f"\nResult: {a} ÷ {b} = {result}")
+    
+    if op == "modulo":
+        if b == 0:
+            print("Error: Cannot perform modulo by zero.")
+        else:
+            result = a % b
+            result = int(result) if result == int(result) else round(result, 10)
+            print(f"\nResult: {a} % {b} = {result}")
     else:
         result = operations[op]
         result = int(result) if result == int(result) else round(result, 10)
