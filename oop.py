@@ -25,11 +25,6 @@ class Calculator:
         return self.value_a % self.value_b
 
     def compute(self, a, operator, b):
-        """
-        a: numeric (float) value for A
-        operator: one of '+', '-', '*', '/', '%'
-        b: numeric (float) value for B
-        """
         self.value_a = a
         self.value_b = b
         self.operator = operator
@@ -50,28 +45,15 @@ class Calculator:
         if isinstance(result, str):
             return result
 
+        self.current = result
         self.value_a = result
         self.value_b = None
-        self.current = result
 
         return result
 
-    def AC(self):
-        """Clear all stored values and history."""
-        self.value_a = None
-        self.value_b = None
-        self.operator = None
-        self.current = None
-        return "Calculator reset."
-
-def parse_and_execute(calc: Calculator, text: str):
-    """
-    Accept strings of the form:
-      <a> <operator> <b>
-    where <a> can be '=' to mean 'use previous result' or a number.
-    Example: '5 + 3' or '= * 2'
-    """
+def parse_and_execute(calc, text):
     tokens = text.strip().split()
+
     if len(tokens) != 3:
         return "Invalid format. Example: 5 + 3 or = + 5"
 
@@ -79,18 +61,18 @@ def parse_and_execute(calc: Calculator, text: str):
 
     if a_token == "=":
         if calc.current is None:
-            return "No previous result to use. Compute something first."
+            return "No previous result available."
         a = float(calc.current)
     else:
         try:
             a = float(a_token)
         except ValueError:
-            return "Invalid value for A. Use a number or '='."
+            return "Invalid value for A."
 
     try:
         b = float(b_token)
     except ValueError:
-        return "Invalid value for B. Use a number."
+        return "Invalid value for B."
 
     return calc.compute(a, operator, b)
 
@@ -99,27 +81,21 @@ def main():
     calc = Calculator()
 
     print("===== Smart Arithmetic Calculator (OOP) =====")
-    print("Enter expressions like: 5 + 3   or   = + 5  (use '=' for previous result)")
-    print("Available operators: +  -  *  /  %")
-    print("Commands: AC (All Clear), quit\n")
+    print("Enter expressions like: 5 + 3")
+    print("Use '=' as Value A to reuse the previous result (example: = + 5)")
+    print("Available operators: +  -  *  /  %  =")
+    print("Type 'quit' to exit.\n")
 
     while True:
         user_input = input(">> ").strip()
 
-        if not user_input:
-            continue
-
-        cmd_low = user_input.lower()
-        if cmd_low == "quit":
+        if user_input.lower() == "quit":
             print("Calculator closed.")
             break
 
-        if user_input.upper() == "AC":
-            print(calc.AC())
-            continue
+        result = parse_and_execute(calc, user_input)
+        print("Result:", result)
 
-        output = parse_and_execute(calc, user_input)
-        print("Result:", output)
 
 if __name__ == "__main__":
     main()
