@@ -17,6 +17,7 @@ def is_number(value):
 def show_menu():
     print("=" * 45)
     print("--- Calculator ---")
+    print("--- Event-driven Paradigm ---")
     print("Commands: add, subtract, multiply, divide, quit")
     print("=" * 45)
 

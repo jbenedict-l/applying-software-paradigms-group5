@@ -28,7 +28,7 @@ def get_operation_choice():
     print("  2. Subtraction    (-)")
     print("  3. Multiplication (*)")
     print("  4. Division       (/)")
-    print("  0. Exit")
+    print("  0. Quit")
 
     while True:  # Keep looping until a valid choice is entered
         try:
@@ -52,7 +52,6 @@ def get_operation_choice():
 #          Returns two values: the result AND a message string.
 # ------------------------------------------------------------
 def perform_operation(a, b, choice):
-
     if choice == 1:
         # ADDITION: add both numbers together
         result = a + b
@@ -104,8 +103,8 @@ def display_result(message):
 def main():
     # Display the program header/title
     print("=" * 45)
-    print("   SMART ARITHMETIC CALCULATOR")
-    print("   Part A - Procedural Paradigm")
+    print(" Calculator")
+    print(" Procedural Paradigm")
     print("=" * 45)
 
     # Main loop — keeps the calculator running until user exits
@@ -115,12 +114,12 @@ def main():
         choice = get_operation_choice()
 
         # STEP 2: Check if user wants to exit (choice = 0)
-        if choice == 0:
+        if choice == "quit":
             print("\nExiting calculator. Goodbye!\n")
             break  # Break out of the loop and end the program
 
         # STEP 3: Get two numbers from the user
-        a = get_numeric_input("Enter first number  (a): ")
+        a = get_numeric_input("Enter first number  (a): ")  
         b = get_numeric_input("Enter second number (b): ")
 
         # STEP 4: Perform the chosen arithmetic operation
