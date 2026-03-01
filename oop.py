@@ -1,52 +1,116 @@
 class Calculator:
     def __init__(self):
-        self.current = 0
+        self.value_a = None
+        self.value_b = None
+        self.operator = None
+        self.current = None
 
-    def add(self, value):
-        self.current += value
-        return self.current
+    def add(self):
+        return self.value_a + self.value_b
 
-    def subtract(self, value):
-        self.current -= value
-        return self.current
+    def subtract(self):
+        return self.value_a - self.value_b
 
-    def multiply(self, value):
-        self.current *= value
-        return self.current
+    def multiply(self):
+        return self.value_a * self.value_b
 
-    def divide(self, value):
-        if value == 0:
+    def divide(self):
+        if self.value_b == 0:
             return "Error: Cannot divide by zero."
-        self.current /= value
-        return self.current
+        return self.value_a / self.value_b
 
-    def modulus(self, value):
-        if value == 0:
+    def modulus(self):
+        if self.value_b == 0:
             return "Error: Cannot perform modulo by zero."
-        self.current %= value
-        return self.current
+        return self.value_a % self.value_b
+
+    def compute(self, a, operator, b):
+        """
+        a: numeric (float) value for A
+        operator: one of '+', '-', '*', '/', '%'
+        b: numeric (float) value for B
+        """
+        self.value_a = a
+        self.value_b = b
+        self.operator = operator
+
+        operations = {
+            "+": self.add,
+            "-": self.subtract,
+            "*": self.multiply,
+            "/": self.divide,
+            "%": self.modulus
+        }
+
+        if operator not in operations:
+            return "Invalid operator."
+
+        result = operations[operator]()
+
+        if isinstance(result, str):
+            return result
+
+        self.value_a = result
+        self.value_b = None
+        self.current = result
+
+        return result
 
     def AC(self):
-        self.current = 0
-        return "Calculator reset to 0."
+        """Clear all stored values and history."""
+        self.value_a = None
+        self.value_b = None
+        self.operator = None
+        self.current = None
+        return "Calculator reset."
 
-    def display(self):
-        return self.current
+def parse_and_execute(calc: Calculator, text: str):
+    """
+    Accept strings of the form:
+      <a> <operator> <b>
+    where <a> can be '=' to mean 'use previous result' or a number.
+    Example: '5 + 3' or '= * 2'
+    """
+    tokens = text.strip().split()
+    if len(tokens) != 3:
+        return "Invalid format. Example: 5 + 3 or = + 5"
+
+    a_token, operator, b_token = tokens
+
+    if a_token == "=":
+        if calc.current is None:
+            return "No previous result to use. Compute something first."
+        a = float(calc.current)
+    else:
+        try:
+            a = float(a_token)
+        except ValueError:
+            return "Invalid value for A. Use a number or '='."
+
+    try:
+        b = float(b_token)
+    except ValueError:
+        return "Invalid value for B. Use a number."
+
+    return calc.compute(a, operator, b)
 
 
 def main():
     calc = Calculator()
 
-    print("===== Object-Oriented Paradigm Calculator =====")
-    print("Start from 0")
-    print("Enter operations like: + 5")
+    print("===== Smart Arithmetic Calculator (OOP) =====")
+    print("Enter expressions like: 5 + 3   or   = + 5  (use '=' for previous result)")
     print("Available operators: +  -  *  /  %")
     print("Commands: AC (All Clear), quit\n")
 
     while True:
-        user_input = input(">> ")
+        user_input = input(">> ").strip()
 
-        if user_input.lower() == "quit":
+        if not user_input:
+            continue
+
+        cmd_low = user_input.lower()
+        if cmd_low == "quit":
             print("Calculator closed.")
             break
 
@@ -54,25 +118,8 @@ def main():
             print(calc.AC())
             continue
 
-        try:
-            operator, value = user_input.split()
-            value = float(value)
-        except:
-            print("Invalid format. Example: + 5")
-            continue
-
-        if operator == "+":
-            print("Result:", calc.add(value))
-        elif operator == "-":
-            print("Result:", calc.subtract(value))
-        elif operator == "*":
-            print("Result:", calc.multiply(value))
-        elif operator == "/":
-            print("Result:", calc.divide(value))
-        elif operator == "%":
-            print("Result:", calc.modulus(value))
-        else:
-            print("Invalid operator.")
+        output = parse_and_execute(calc, user_input)
+        print("Result:", output)
 
 if __name__ == "__main__":
     main()
