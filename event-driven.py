@@ -1,9 +1,9 @@
 # ── State ────────────────────────────────
 state = {
-    "current":   "IDLE",   # current state
-    "operation": None,     # chosen operation
-    "a":         None,     # first number
-    "b":         None,     # second number
+    "current": "IDLE",   # current state
+    "operation": None,   # chosen operation
+    "a": None,           # first number
+    "b": None,           # second number
 }
 
 # ── Helpers ───────────────────────────────
@@ -23,9 +23,9 @@ def show_menu():
 
 def show_prompt():
     prompts = {
-        "IDLE":             "Enter command: ",
-        "WAITING_FOR_A":    "Enter first number: ",
-        "WAITING_FOR_B":    "Enter second number: ",
+        "IDLE": "Enter command: ",
+        "WAITING_FOR_A": "Enter first number: ",
+        "WAITING_FOR_B": "Enter second number: ",
     }
     print(prompts.get(state["current"], ">>> "), end="")
 
@@ -33,7 +33,7 @@ def show_prompt():
 def handle_idle(event):
     if event in ("add", "subtract", "multiply", "divide", "modulo"):
         state["operation"] = event
-        state["current"]   = "WAITING_FOR_A"
+        state["current"] = "WAITING_FOR_A"
 
     elif event == "quit":
         print("Goodbye!")
@@ -45,7 +45,7 @@ def handle_idle(event):
 
 def handle_waiting_for_a(event):
     if is_number(event):
-        state["a"]       = float(event)
+        state["a"] = float(event)
         state["current"] = "WAITING_FOR_B"
     
     elif event == "quit":
@@ -58,7 +58,7 @@ def handle_waiting_for_a(event):
 
 def handle_waiting_for_b(event):
     if is_number(event):
-        state["b"]       = float(event)
+        state["b"] = float(event)
         state["current"] = "COMPUTING"
         handle_computing()
 
