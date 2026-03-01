@@ -53,7 +53,7 @@ def handle_waiting_for_a(event):
         return "QUIT"
     
     else:
-        print(f"'{event}' is not a valid number. Please enter a number.")
+        print(f"Error: Invalid numeric input.")
 
 
 def handle_waiting_for_b(event):
@@ -67,7 +67,7 @@ def handle_waiting_for_b(event):
         return "QUIT"
     
     else:
-        print(f"'{event}' is not a valid number. Please enter a number.")
+        print(f"Error: Invalid numeric input.")
 
 
 def handle_computing():

@@ -1,7 +1,5 @@
 # ------------------------------------------------------------
 # FUNCTION 1: get_numeric_input(prompt)
-# PURPOSE: Ask the user to enter a number.
-#          Keeps asking until a valid number is given.
 # ------------------------------------------------------------
 def get_numeric_input(prompt):
     while True:  # Loop forever until valid input is received
@@ -13,13 +11,11 @@ def get_numeric_input(prompt):
         except ValueError:
             # If the user types letters or symbols, float() will fail
             # and we catch the error here instead of crashing the program
-            print("Invalid input. Please enter a numeric value.")
+            print("Error: Invalid numeric input.")
 
 
 # ------------------------------------------------------------
 # FUNCTION 2: get_operation_choice()
-# PURPOSE: Show the menu of operations and get a valid choice.
-#          Keeps asking until the user enters 0-5.
 # ------------------------------------------------------------
 def get_operation_choice():
     # Print the menu options for the user to choose from
@@ -34,7 +30,7 @@ def get_operation_choice():
     while True:  # Keep looping until a valid choice is entered
         try:
             # int() converts input to a whole number (no decimals for menu)
-            choice = int(input("\nEnter choice (0-5): "))
+            choice = float(input("\nEnter choice (0-5): "))
 
             # Check if the number is within the valid range
             if 0 <= choice <= 5:
@@ -43,14 +39,11 @@ def get_operation_choice():
                 print("Please enter a number between 0 and 5.")
         except ValueError:
             # If the user types a word or decimal, catch the error
-            print("Invalid input. Please enter a whole number.")
+            print("Invalid input. Please enter a  number.")
 
 
 # ------------------------------------------------------------
 # FUNCTION 3: perform_operation(a, b, choice)
-# PURPOSE: Perform the arithmetic based on the user's choice.
-#          Takes two numbers (a, b) and the operation choice.
-#          Returns two values: the result AND a message string.
 # ------------------------------------------------------------
 def perform_operation(a, b, choice):
     if choice == 1:
@@ -92,13 +85,11 @@ def perform_operation(a, b, choice):
 
     # Build and return the formatted result message
     # Example: "5.0 + 3.0 = 8.0"
-    return result, f"Result: {a} {operator} {b} = {result}"
+    return result, f"{a} {operator} {b} = {result}"
 
 
 # ------------------------------------------------------------
 # FUNCTION 4: display_result(message)
-# PURPOSE: Print the result or error message to the screen.
-#          Kept separate so output is easy to modify later.
 # ------------------------------------------------------------
 def display_result(message):
     print(f"\nResult: {message}")
@@ -106,9 +97,6 @@ def display_result(message):
 
 # ------------------------------------------------------------
 # FUNCTION 5: main()
-# PURPOSE: The MAIN CONTROL FLOW of the program.
-#          This is the "boss" function — it calls all other
-#          functions in the correct order, step by step.
 # ------------------------------------------------------------
 def main():
     # Display the program header/title
@@ -127,7 +115,7 @@ def main():
         if choice == "quit":
             print("\nExiting calculator. Goodbye!\n")
             break  # Break out of the loop and end the program
-
+        
         # STEP 3: Get two numbers from the user
         a = get_numeric_input("Enter first number: ")  
         b = get_numeric_input("Enter second number: ")
@@ -141,13 +129,6 @@ def main():
         # STEP 5: Display the result or error message
         display_result(message)
 
-        # Print a separator line for readability between calculations
-        print("-" * 45)
 
-# ------------------------------------------------------------
-# ENTRY POINT
-# This block ensures main() only runs when this file is
-# executed directly — not when imported as a module.
-# ------------------------------------------------------------
 if __name__ == "__main__":
     main()
