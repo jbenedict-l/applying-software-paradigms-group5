@@ -32,6 +32,11 @@ def calculate(num1, num2, operation):
     return operations[operation](num1, num2)
 
 if __name__ == "__main__":
+    print("=" * 45)
+    print(" Smart Arithmetic Calculator")
+    print(" Functional Paradigm")
+    print("=" * 45)
+
     try:
         val1 = float(input("Enter first number: "))
         val2 = float(input("Enter second number: "))

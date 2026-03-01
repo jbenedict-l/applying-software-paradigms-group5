@@ -80,7 +80,11 @@ def parse_and_execute(calc, text):
 def main():
     calc = Calculator()
 
-    print("===== Smart Arithmetic Calculator (OOP) =====")
+    print("=" * 45)
+    print(" Smart Arithmetic Calculator")
+    print(" Object-Oriented Paradigm")
+    print("=" * 45)
+
     print("Enter expressions like: 5 + 3")
     print("Use '=' as Value A to reuse the previous result (example: = + 5)")
     print("Available operators: +  -  *  /  %  =")
@@ -94,7 +98,7 @@ def main():
             break
 
         result = parse_and_execute(calc, user_input)
-        print("Result:", result)
+        print(f"Result: {user_input} = {result}")
 
 
 if __name__ == "__main__":
